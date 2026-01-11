@@ -1,20 +1,20 @@
 "use server";
 
 import { z } from "zod";
-import { CAT_API_KEY } from "./env";
+import { getApiKey } from "./env";
 import { logger } from "./logger";
 
-export const ImageSchema = z.object({
-  url: z.string().url(),
+const ImageSchema = z.object({
+  url: z.url(),
 });
 
 export type Image = z.infer<typeof ImageSchema>;
 
-export const ImagesArraySchema = z.array(ImageSchema);
+const ImagesArraySchema = z.array(ImageSchema);
 
 export async function fetchImage(): Promise<Image> {
   const res = await fetch("https://api.thecatapi.com/v1/images/search", {
-    headers: { "x-api-key": CAT_API_KEY }, // 追加
+    headers: { "x-api-key": getApiKey() }, // 追加
   });
 
   if (!res.ok) {

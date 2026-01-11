@@ -44,6 +44,14 @@
   filter: drop-shadow(0 0 0 transparent);
 }
 
+.button:focus-visible {
+  /* キーボードフォーカス時の視覚的フィードバック */
+  outline: 3px solid #343a40;
+  outline-offset: 4px;
+  transform: translateY(3px);
+  filter: drop-shadow(0 3px 0 var(--foreground-color));
+}
+
 .frame {
   width: 400px;
   aspect-ratio: 1 / 1;

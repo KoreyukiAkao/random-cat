@@ -11,7 +11,7 @@ class Logger {
       timestamp,
       level,
       message,
-      ...metadata,
+      ...(metadata && Object.keys(metadata).length > 0 && { metadata }),
     };
 
     switch (level) {

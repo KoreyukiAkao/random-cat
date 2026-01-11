@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn2.thecatapi.com',
+        pathname: '/images/**',
       }
     ]
   }

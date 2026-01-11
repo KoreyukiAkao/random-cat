@@ -1,6 +1,7 @@
 import { connection } from "next/server";
 import { CatImage } from "./cat-image";
 import { fetchImage } from "./fetch-images";
+import { logger } from "./logger";
 
 export default async function Home() {
   // ビルド時にfetchImageの結果が固定されないようにする
@@ -10,7 +11,7 @@ export default async function Home() {
   try {
     image = await fetchImage();
   } catch (error) {
-    console.error("Failed to fetch cat image:", error);
+    logger.error("Failed to fetch cat image:", { error: error as unknown });
   }
 
   // 画像のURLを渡す

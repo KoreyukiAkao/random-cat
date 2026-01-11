@@ -6,4 +6,11 @@ const getRequiredEnv = (key: string): string => {
   return value;
 };
 
-export const CAT_API_KEY = getRequiredEnv("CAT_API_KEY");
+let cachedApiKey: string | undefined;
+
+export function getApiKey(): string {
+  if (cachedApiKey === undefined) {
+    cachedApiKey = getRequiredEnv("CAT_API_KEY");
+  }
+  return cachedApiKey;
+}

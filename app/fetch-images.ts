@@ -18,7 +18,7 @@ export async function fetchImage(): Promise<Image> {
   });
 
   if (!res.ok) {
-    throw new Error(`APIエラー: ${res.status}${res.statusText}`);
+    throw new Error(`APIエラー: ${res.status} ${res.statusText}`);
   }
 
   const rowData = await res.json();

@@ -2,14 +2,15 @@
 
 import { z } from "zod";
 import { CAT_API_KEY } from "./env";
+import { logger } from "./logger";
 
-const ImageSchema = z.object({
-  url: z.string(),
+export const ImageSchema = z.object({
+  url: z.string().url(),
 });
 
-type Image = z.infer<typeof ImageSchema>;
+export type Image = z.infer<typeof ImageSchema>;
 
-const ImagesArraySchema = z.array(ImageSchema);
+export const ImagesArraySchema = z.array(ImageSchema);
 
 export async function fetchImage(): Promise<Image> {
   const res = await fetch("https://api.thecatapi.com/v1/images/search", {
@@ -27,6 +28,6 @@ export async function fetchImage(): Promise<Image> {
     throw new Error("画像データが取得できませんでした");
   }
 
-  console.log("fetchImage: 画像情報を取得しました", images);
+  logger.info("fetchImage: 画像情報を取得しました", { images });
   return images[0];
 }

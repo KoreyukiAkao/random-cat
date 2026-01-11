@@ -5,8 +5,18 @@ import { fetchImage } from "./fetch-images";
 export default async function Home() {
   // ビルド時にfetchImageの結果が固定されないようにする
   await connection();
-  // APIから画像Uを取得
-  const image = await fetchImage();
+  // APIから画像URLを取得
+  let image = null;
+  try {
+    image = await fetchImage();
+  } catch (error) {
+    console.error("Failed to fetch cat image:", error);
+  }
+
   // 画像のURLを渡す
-  return <CatImage url={image.url} />;
+  if (image) {
+    return <CatImage url={image.url} />;
+  }
+
+  return <div>画像の取得に失敗しました。後ほど再試行してください。</div>;
 }
